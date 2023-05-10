@@ -1,5 +1,4 @@
-# indoor-navigation
-indoor navigation systems
+# indoor-navigation ( iç mekan navigasyon sistemleri)
 
 İç mekan navigasyonu, bir yapı içinde konum belirleme ve yönlendirme sistemlerinin kullanımıdır. Bu sistemler, insanların iç mekanlarda yolunu 
 bulmalarına yardımcı olmak için tasarlanmıştır. İç mekan navigasyonu, genellikle alışveriş merkezleri, hastaneler, havalimanları, ofis binaları, 
