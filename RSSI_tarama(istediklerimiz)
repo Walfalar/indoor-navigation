@@ -1,0 +1,52 @@
+import subprocess
+
+def getAPinfo(networks=None):
+    command = 'netsh wlan show networks mode=Bssid'
+    output = subprocess.check_output(command, shell=True).decode("utf-8")
+
+    lines = output.split('\n')
+    access_points = []
+    access_point = {}
+    
+    for line in lines:
+        line = line.strip()
+        
+        if line.startswith("SSID"):
+            if access_point:
+                access_points.append(access_point)
+            access_point = {'ssid': line.split(":")[1].strip()}
+        
+        elif line.startswith("BSSID"):
+            access_point['bssid'] = line.split(":")[1].strip()
+        
+        elif line.startswith("Signal"):
+            access_point['signal'] = line.split(":")[1].strip()
+        
+        elif line.startswith("Channel"):
+            access_point['channel'] = line.split(":")[1].strip()
+        
+        elif line.startswith("Authentication"):
+            access_point['authentication'] = line.split(":")[1].strip()
+        
+        elif line.startswith("Encryption"):
+            access_point['encryption'] = line.split(":")[1].strip()
+    
+    if access_point:
+        access_points.append(access_point)
+    
+    return access_points
+
+
+# Kullanmak istediğiniz ağ isimlerini bir listeye ekleyin
+target_networks = ["ilknet_ga5513_5G", "Wifi4", "wifi2"]
+
+access_points = getAPinfo(target_networks)
+
+for ap in access_points:
+    print("SSID:", ap['ssid'])
+    print("BSSID:", ap['bssid'])
+    print("Signal:", ap['signal'])
+    print("Channel:", ap['channel'])
+    print("Authentication:", ap['authentication'])
+    print("Encryption:", ap['encryption'])
+    print()
